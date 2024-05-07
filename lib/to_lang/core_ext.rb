@@ -31,7 +31,7 @@ class Hash
     elsif value.is_a?(Hash)
       stack << [key,value]
     else
-      param << "#{key}=#{URI.encode(value.to_s, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}&"
+      param << "#{key}=#{URI::Parser.new.escape(value.to_s, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}&"
     end
 
     stack.each do |parent, hash|

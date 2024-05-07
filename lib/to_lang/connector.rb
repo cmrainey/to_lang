@@ -19,7 +19,7 @@ module ToLang
         if value.nil?
           key
         elsif value.is_a?(Array)
-          value.map {|v| "#{key}=#{URI.encode(v.to_s, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}"}
+          value.map {|v| "#{key}=#{URI::Parser.new.escape(v.to_s, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}"}
         else
           {key => value}.to_params
         end
